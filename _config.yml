@@ -6,18 +6,18 @@
 # in [brackets]. After editing, commit and push — GitHub rebuilds the site.
 # ---------------------------------------------------------------------------
 
-title: "[Your Name]"
+title: "Caylee McShane"
 description: "Data scientist working on multi-agent systems and AI control research."
-author: "[Your Name]"
+author: "Caylee McShane"
 
 # Your live site URL. For a project site this is:
 #   https://[username].github.io/[repo-name]
 # For a user site (repo named [username].github.io), drop baseurl (leave "").
-url: "https://[username].github.io"
+url: "https://cayleemcshane.github.io"
 baseurl: ""
 
 # Social / preview metadata (optional but nice for link cards)
-github_username: "[username]"
+github_username: "caylee-mcshane"
 # twitter_username: "[username]"
 
 # Build settings
