@@ -1,8 +1,8 @@
-# [Your Name]
+# Caylee McShane
 
 Data scientist working on applied machine learning, multi-agent systems, and AI safety.
 
-This repository hosts my personal site: **https://[username].github.io** *(update once Pages is live)*.
+This repository hosts my personal site: **https://cayleemcshane.github.io** *(update once Pages is live)*.
 
 ---
 
@@ -20,9 +20,9 @@ An AI-control study of how coordinated agents built on the same model can pursue
 
 ## Elsewhere
 
-- Email — [you@email.com](mailto:[you@email.com])
-- GitHub — [github.com/[username]](https://github.com/[username])
-- LinkedIn — [linkedin.com/in/[username]](https://linkedin.com/in/[username])
+- Email — [you@email.com](mailto:caylee.mcshane@gmail.com)
+- GitHub — [github.com/[username]](https://github.com/caylee-mcshane)
+- LinkedIn — [linkedin.com/in/[username]](https://linkedin.com/in/caylee-mcshane)
 - LessWrong — [profile link]([profile-link])
 
 ---
