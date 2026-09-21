@@ -1,3 +1,37 @@
-theme: jekyll-theme-minimal
-title: Caylee McShane's homepage
-description: Bookmark this to keep an eye on my project updates!
+# ---------------------------------------------------------------------------
+# GitHub Pages / Jekyll site config
+#
+# Your custom index.html is served as-is, so most of this is metadata used by
+# GitHub, link previews, and any Markdown pages you add later. Edit the values
+# in [brackets]. After editing, commit and push — GitHub rebuilds the site.
+# ---------------------------------------------------------------------------
+
+title: "[Your Name]"
+description: "Data scientist working on multi-agent systems and AI control research."
+author: "[Your Name]"
+
+# Your live site URL. For a project site this is:
+#   https://[username].github.io/[repo-name]
+# For a user site (repo named [username].github.io), drop baseurl (leave "").
+url: "https://[username].github.io"
+baseurl: ""
+
+# Social / preview metadata (optional but nice for link cards)
+github_username: "[username]"
+# twitter_username: "[username]"
+
+# Build settings
+# A static index.html doesn't need a theme. If you later add Markdown pages
+# and want them styled by Jekyll, uncomment a theme below.
+# theme: minima
+
+# Keep these files out of the built site
+exclude:
+  - README.md
+  - PROJECT_CONTEXT.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+
+# Don't process these as Jekyll (safe defaults)
+plugins: []
