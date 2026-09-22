@@ -25,7 +25,9 @@
     --line:#E4E6E3;
     --accent:#16665E;
     --accent-soft:#DCEAE6;
-    --maxw:720px;
+    --maxw:720px;      /* main reading column — stays put */
+    --sidew:240px;     /* sidebar width */
+    --shellw:1056px;   /* whole page: sidebar + gap + main + padding */
     box-sizing:border-box;
     padding-top:env(safe-area-inset-top,0px);
     padding-bottom:env(safe-area-inset-bottom,0px);
@@ -54,17 +56,24 @@
     line-height:1.65;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{
-    max-width:var(--maxw);
+
+  /* full-width containers (header, footer) */
+  .wide{ max-width:var(--shellw); margin:0 auto; padding:0 24px; }
+
+  /* the two-column shell: sidebar + main */
+  .shell{
+    max-width:var(--shellw);
     margin:0 auto;
     padding:0 24px;
+    display:grid;
+    grid-template-columns:var(--sidew) minmax(0,var(--maxw));
+    gap:48px;
+    align-items:start;
   }
+  .content{ min-width:0; }  /* keeps long content from blowing out the column */
 
   /* ---- header ---- */
-  header{
-    border-bottom:1px solid var(--line);
-    background:var(--bg);
-  }
+  header{ border-bottom:1px solid var(--line); background:var(--bg); }
   .bar{
     display:flex; align-items:baseline; justify-content:space-between;
     gap:16px; padding:22px 0;
@@ -80,6 +89,24 @@
     font-size:13px; color:var(--muted); text-decoration:none;
   }
   nav a:hover{color:var(--accent)}
+
+  /* ---- sidebar ---- */
+  .side{ position:sticky; top:28px; align-self:start; padding-top:76px; }
+  .side-block{
+    padding-top:20px; margin-top:20px; border-top:1px solid var(--line);
+  }
+  .side-block:first-child{ padding-top:0; margin-top:0; border-top:0; }
+  .side-label{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:12px; color:var(--faint); margin:0 0 10px;
+  }
+  .side-note{ font-size:14px; color:var(--muted); margin:0; line-height:1.55; }
+  .side-note a{ color:var(--accent); text-decoration:none; }
+  .side-note a:hover{ text-decoration:underline; }
+  .side-list{ list-style:none; margin:0; padding:0; }
+  .side-list li{ font-size:14px; color:var(--muted); padding:4px 0; }
+  .side-list li a{ color:var(--muted); text-decoration:none; }
+  .side-list li a:hover{ color:var(--accent); }
 
   /* ---- hero ---- */
   .hero{padding:76px 0 64px}
@@ -110,10 +137,7 @@
   a{color:var(--accent); text-underline-offset:3px; text-decoration-thickness:1px}
 
   /* ---- featured research ---- */
-  .study{
-    border-left:2px solid var(--accent);
-    padding:4px 0 4px 22px;
-  }
+  .study{ border-left:2px solid var(--accent); padding:4px 0 4px 22px; }
   .study .tag{
     font-family:"IBM Plex Mono",monospace;
     font-size:12px; color:var(--faint); margin:0 0 8px;
@@ -162,12 +186,18 @@
   a:focus-visible, nav a:focus-visible{
     outline:2px solid var(--accent); outline-offset:3px; border-radius:2px;
   }
+
+  /* ---- collapse to single column on narrower screens ---- */
+  @media (max-width:1024px){
+    .shell{ grid-template-columns:minmax(0,var(--maxw)); justify-content:center; }
+    .side{ display:none; }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="wrap bar">
+  <div class="wide bar">
     <!-- EDIT: your name / wordmark -->
     <a class="wordmark" href="#">Caylee McShane</a>
     <nav>
@@ -179,96 +209,127 @@
   </div>
 </header>
 
-<main class="wrap">
+<div class="shell">
 
-  <div class="hero">
-    <!-- EDIT: a short role line -->
-    <p class="kicker">Data scientist · applied ML & multi-agent systems</p>
-    <!-- EDIT: your positioning statement -->
-    <h1>I build with teams of AI agents, and I study how to keep them safe when they work together.</h1>
-    <!-- EDIT: one or two grounding sentences -->
-    <p>My day-to-day is designing and shipping multi-agent systems. My research turns that same experience toward safety: how coordinated agents can slip past oversight, and which team structures and monitoring strategies keep them accountable.</p>
-  </div>
-
-  <section id="about">
-    <h2>About</h2>
-    <!-- EDIT: 2-4 sentences of real background. Replace the bracketed bits. -->
-    <p>I'm a data scientist with 6 of experience tuning and deploying machine learning and LLM systems at [company / context]. Recently my work has centered on orchestrating teams of agents — role hierarchies, dispatch patterns, and shared-memory coordination — to get complex tasks done reliably.</p>
-    <p>Working with these systems every day made their safety properties concrete rather than abstract: the same coordination that makes a team effective also makes its behavior harder to oversee. That's what pulled me toward AI safety, and specifically toward the control problem for multi-agent deployments.</p>
-  </section>
-
-  <section id="research">
-    <h2>Research</h2>
-    <div class="study">
-      <!-- EDIT the status tag as the project progresses -->
-      <p class="tag">In progress · 2026</p>
-      <h3>
-        <!-- EDIT: link to the research repo when it's live -->
-        <a href="[LINK-TO-RESEARCH-REPO]">Fragmented Oversight: How Multi-Agent Team Structure Affects Monitorability Under Distributed Attacks</a>
-      </h3>
-      <p>An AI-control study of what happens when several agents built on the same model coordinate toward a hidden objective. It measures how team topology and monitor placement change whether coordinated misbehavior stays detectable, and which monitoring strategies best restore oversight. Built on Inspect and ControlArena; attacks run only inside a synthetic sandbox against self-built monitors.</p>
-      <a class="more" href="[LINK-TO-RESEARCH-REPO]">Read the project →</a>
+  <!-- ===================== SIDEBAR ===================== -->
+  <!-- Sticky context panel. Hidden on narrow screens.     -->
+  <aside class="side">
+    <div class="side-block">
+      <p class="side-label">Currently</p>
+      <p class="side-note">Building <a href="#research">Fragmented Oversight</a>, a study of monitorability in multi-agent systems.</p>
     </div>
-    <!-- Add more <div class="study"> blocks here as you publish writeups. -->
-  </section>
-
-  <section id="work">
-    <h2>Toolkit</h2>
-    <div class="groups">
-      <div class="group">
-        <h4>Languages &amp; tools</h4>
-        <ul>
-          <li>Python</li>
-          <li>[SQL / others]</li>
-          <li>PyTorch / scikit-learn</li>
-          <li>Docker</li>
-        </ul>
-      </div>
-      <div class="group">
-        <h4>ML &amp; LLMs</h4>
-        <ul>
-          <li>Fine-tuning &amp; evaluation</li>
-          <li>Multi-agent orchestration</li>
-          <li>Prompt &amp; system design</li>
-          <li>[Your specialties]</li>
-        </ul>
-      </div>
-      <div class="group">
-        <h4>Safety</h4>
-        <ul>
-          <li>AI control &amp; monitoring</li>
-          <li>Inspect / ControlArena</li>
-          <li>Agent red-teaming (sandboxed)</li>
-          <li>Experimental design</li>
-        </ul>
-      </div>
-      <div class="group">
-        <h4>Interests</h4>
-        <ul>
-          <li>Oversight of agent systems</li>
-          <li>Evaluation validity</li>
-          <li>AI ethics</li>
-          <li>[Add your own]</li>
-        </ul>
-      </div>
+    <div class="side-block">
+      <p class="side-label">Focus</p>
+      <ul class="side-list">
+        <li>AI control</li>
+        <li>Agent oversight</li>
+        <li>Evaluation validity</li>
+      </ul>
     </div>
-  </section>
+    <div class="side-block">
+      <p class="side-label">Links</p>
+      <ul class="side-list">
+        <!-- EDIT these to match the Elsewhere section below -->
+        <li><a href="https://github.com/[username]">GitHub</a></li>
+        <li><a href="[profile-link]">LessWrong</a></li>
+        <li><a href="mailto:[you@email.com]">Email</a></li>
+      </ul>
+    </div>
+  </aside>
 
-  <section id="contact">
-    <h2>Elsewhere</h2>
-    <ul class="links">
-      <!-- EDIT every href + handle below. Delete rows you don't use. -->
-      <li><span class="role">Email</span><a href="mailto:[you@email.com]">[you@email.com]</a></li>
-      <li><span class="role">GitHub</span><a href="https://github.com/[username]">github.com/[username]</a></li>
-      <li><span class="role">LinkedIn</span><a href="https://linkedin.com/in/[username]">linkedin.com/in/[username]</a></li>
-      <li><span class="role">LessWrong</span><a href="[profile-link]">[profile-link]</a></li>
-    </ul>
-  </section>
+  <!-- ===================== MAIN ===================== -->
+  <main class="content">
 
-</main>
+    <div class="hero">
+      <!-- EDIT: a short role line -->
+      <p class="kicker">Data scientist · applied ML & multi-agent systems</p>
+      <!-- EDIT: your positioning statement -->
+      <h1>I build with teams of AI agents, and I study how to keep them safe when they work together.</h1>
+      <!-- EDIT: one or two grounding sentences -->
+      <p>My day-to-day is designing and shipping multi-agent systems. My research turns that same experience toward safety: how coordinated agents can slip past oversight, and which team structures and monitoring strategies keep them accountable.</p>
+    </div>
+
+    <section id="about">
+      <h2>About</h2>
+      <!-- EDIT: 2-4 sentences of real background. Replace the bracketed bits. -->
+      <p>I'm a data scientist with 6 years of experience tuning and deploying machine learning and LLM systems. Recently my work has centered on orchestrating teams of agents — role hierarchies, dispatch patterns, and shared-memory coordination — to get complex tasks done reliably.</p>
+      <p>Working with these systems every day made their safety properties concrete rather than abstract: the same coordination that makes a team effective also makes its behavior harder to oversee. That's what pulled me toward AI safety, and specifically toward the control problem for multi-agent deployments.</p>
+    </section>
+
+    <section id="research">
+      <h2>Research</h2>
+      <div class="study">
+        <!-- EDIT the status tag as the project progresses -->
+        <p class="tag">In progress · 2026</p>
+        <h3>
+          <!-- EDIT: link to the research repo when it's live -->
+          <a href="[LINK-TO-RESEARCH-REPO]">Fragmented Oversight: How Multi-Agent Team Structure Affects Monitorability Under Distributed Attacks</a>
+        </h3>
+        <p>An AI-control study of what happens when several agents built on the same model coordinate toward a hidden objective. It measures how team topology and monitor placement change whether coordinated misbehavior stays detectable, and which monitoring strategies best restore oversight. Built on Inspect and ControlArena; attacks run only inside a synthetic sandbox against self-built monitors.</p>
+        <a class="more" href="[LINK-TO-RESEARCH-REPO]">Read the project →</a>
+      </div>
+      <!-- Add more <div class="study"> blocks here as you publish writeups. -->
+    </section>
+
+    <section id="work">
+      <h2>Toolkit</h2>
+      <div class="groups">
+        <div class="group">
+          <h4>Languages &amp; tools</h4>
+          <ul>
+            <li>Python/Javascript/C++/JSL</li>
+            <li>[SQL]</li>
+            <li>PyTorch / scikit-learn</li>
+            <li>Docker</li>
+          </ul>
+        </div>
+        <div class="group">
+          <h4>ML &amp; LLMs</h4>
+          <ul>
+            <li>Fine-tuning &amp; evaluation</li>
+            <li>Multi-agent orchestration</li>
+            <li>Prompt &amp; system design</li>
+            <li>RL Reward Shaping</li>
+          </ul>
+        </div>
+        <div class="group">
+          <h4>Safety</h4>
+          <ul>
+            <li>AI control &amp; monitoring</li>
+            <li>Inspect / ControlArena</li>
+            <li>Agent red-teaming (sandboxed)</li>
+            <li>Experimental design</li>
+          </ul>
+        </div>
+        <div class="group">
+          <h4>Interests</h4>
+          <ul>
+            <li>Oversight of agent systems</li>
+            <li>Evaluation validity</li>
+            <li>AI ethics</li>
+            <li>AI Education</li>
+            <li>Reinforcement Learning</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Elsewhere</h2>
+      <ul class="links">
+        <!-- EDIT every href + handle below. Delete rows you don't use. -->
+        <li><span class="role">Email</span><a href="mailto:[you@email.com]">caylee.mcshane@gmail.com</a></li>
+        <li><span class="role">GitHub</span><a href="https://github.com/[username]">github.com/caylee-mcshane</a></li>
+        <li><span class="role">LinkedIn</span><a href="https://linkedin.com/in/[username]">linkedin.com/in/caylee-mcshane</a></li>
+        <li><span class="role">LessWrong</span><a href="https://www.lesswrong.com/users/caylee-mcshane">https://www.lesswrong.com/users/caylee-mcshane</a></li>
+      </ul>
+    </section>
+
+  </main>
+</div>
 
 <footer>
-  <div class="wrap">
+  <div class="wide">
     <!-- EDIT: name + year -->
     <p>© 2026 Caylee McShane. Built with GitHub Pages.</p>
   </div>
