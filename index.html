@@ -89,6 +89,7 @@
     font-size:13px; color:var(--muted); text-decoration:none;
   }
   nav a:hover{color:var(--accent)}
+  nav a.current{color:var(--accent)}
 
   /* ---- sidebar ---- */
   .side{ position:sticky; top:28px; align-self:start; padding-top:76px; }
@@ -198,11 +199,11 @@
 
 <header>
   <div class="wide bar">
-    <!-- EDIT: your name / wordmark -->
-    <a class="wordmark" href="#">Caylee McShane</a>
+    <a class="wordmark" href="index.html">Caylee McShane</a>
     <nav>
       <a href="#about">About</a>
       <a href="#research">Research</a>
+      <a href="teaching.html">Teaching</a>
       <a href="#work">Toolkit</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -219,6 +220,10 @@
       <p class="side-note">Building <a href="#research">Fragmented Oversight</a>, a study of monitorability in multi-agent systems.</p>
     </div>
     <div class="side-block">
+      <p class="side-label">Teaching</p>
+      <p class="side-note"><a href="teaching.html">Adjunct Professor, AI &amp; ML</a><br>Biotechnology M.S., CSU San Marcos</p>
+    </div>
+    <div class="side-block">
       <p class="side-label">Focus</p>
       <ul class="side-list">
         <li>AI control</li>
@@ -229,7 +234,6 @@
     <div class="side-block">
       <p class="side-label">Links</p>
       <ul class="side-list">
-        <!-- EDIT these to match the Elsewhere section below -->
         <li><a href="https://github.com/caylee-mcshane">GitHub</a></li>
         <li><a href="https://www.lesswrong.com/users/caylee-mcshane">LessWrong</a></li>
         <li><a href="mailto:caylee.mcshane@gmail.com">Email</a></li>
@@ -241,28 +245,23 @@
   <main class="content">
 
     <div class="hero">
-      <!-- EDIT: a short role line -->
       <p class="kicker">Data scientist · applied ML & multi-agent systems</p>
-      <!-- EDIT: your positioning statement -->
       <h1>I build with teams of AI agents, and I study how to keep them safe when they work together.</h1>
-      <!-- EDIT: one or two grounding sentences -->
       <p>My day-to-day is designing and shipping multi-agent systems. My research turns that same experience toward safety: how coordinated agents can slip past oversight, and which team structures and monitoring strategies keep them accountable.</p>
     </div>
 
     <section id="about">
       <h2>About</h2>
-      <!-- EDIT: 2-4 sentences of real background. Replace the bracketed bits. -->
       <p>I'm a data scientist with 6 years of experience tuning and deploying machine learning and LLM systems. Recently my work has centered on orchestrating teams of agents — role hierarchies, dispatch patterns, and shared-memory coordination — to get complex tasks done reliably.</p>
+      <p>I'm also an adjunct professor at California State University San Marcos, where I teach AI and machine learning in the Biotechnology M.S. program and built the course curriculum. Ethics runs through the whole course — how these systems fail, who they affect, and what responsible deployment asks of the people building them. There's an <a href="teaching.html">overview of the course here</a>.</p>
       <p>Working with these systems every day made their safety properties concrete rather than abstract: the same coordination that makes a team effective also makes its behavior harder to oversee. That's what pulled me toward AI safety, and specifically toward the control problem for multi-agent deployments.</p>
     </section>
 
     <section id="research">
       <h2>Research</h2>
       <div class="study">
-        <!-- EDIT the status tag as the project progresses -->
         <p class="tag">In progress · 2026</p>
         <h3>
-          <!-- EDIT: link to the research repo when it's live -->
           <a href="[LINK-TO-RESEARCH-REPO]">Fragmented Oversight: How Multi-Agent Team Structure Affects Monitorability Under Distributed Attacks</a>
         </h3>
         <p>An AI-control study of what happens when several agents built on the same model coordinate toward a hidden objective. Prior work shows per-agent monitoring fragments when several agents split an attack between them, and sets aside the monitor that sees the whole attack as undeployable because a defender cannot tell which actions belong together; in an orchestrated team, the orchestrator layer can tell, and this project measures whether monitoring there restores oversight.</p>
@@ -277,8 +276,8 @@
         <div class="group">
           <h4>Languages &amp; tools</h4>
           <ul>
-            <li>Python/Javascript/C++/JSL</li>
-            <li>[SQL]</li>
+            <li>Python / JavaScript / C++ / JSL</li>
+            <li>SQL</li>
             <li>PyTorch / scikit-learn</li>
             <li>Docker</li>
           </ul>
@@ -289,7 +288,7 @@
             <li>Fine-tuning &amp; evaluation</li>
             <li>Multi-agent orchestration</li>
             <li>Prompt &amp; system design</li>
-            <li>RL Reward Shaping</li>
+            <li>RL reward shaping</li>
           </ul>
         </div>
         <div class="group">
@@ -307,7 +306,7 @@
             <li>Oversight of agent systems</li>
             <li>Evaluation validity</li>
             <li>AI ethics &amp; education</li>
-            <li>Reinforcement Learning</li>
+            <li>Reinforcement learning</li>
           </ul>
         </div>
       </div>
@@ -316,11 +315,10 @@
     <section id="contact">
       <h2>Elsewhere</h2>
       <ul class="links">
-        <!-- EDIT every href + handle below. Delete rows you don't use. -->
-        <li><span class="role">Email</span><a href="mailto:[you@email.com]">caylee.mcshane@gmail.com</a></li>
-        <li><span class="role">GitHub</span><a href="https://github.com/[username]">github.com/caylee-mcshane</a></li>
-        <li><span class="role">LinkedIn</span><a href="https://linkedin.com/in/[username]">linkedin.com/in/caylee-mcshane</a></li>
-        <li><span class="role">LessWrong</span><a href="https://www.lesswrong.com/users/caylee-mcshane">https://www.lesswrong.com/users/caylee-mcshane</a></li>
+        <li><span class="role">Email</span><a href="mailto:caylee.mcshane@gmail.com">caylee.mcshane@gmail.com</a></li>
+        <li><span class="role">GitHub</span><a href="https://github.com/caylee-mcshane">github.com/caylee-mcshane</a></li>
+        <li><span class="role">LinkedIn</span><a href="https://linkedin.com/in/caylee-mcshane">linkedin.com/in/caylee-mcshane</a></li>
+        <li><span class="role">LessWrong</span><a href="https://www.lesswrong.com/users/caylee-mcshane">lesswrong.com/users/caylee-mcshane</a></li>
       </ul>
     </section>
 
@@ -329,7 +327,6 @@
 
 <footer>
   <div class="wide">
-    <!-- EDIT: name + year -->
     <p>© 2026 Caylee McShane. Built with GitHub Pages.</p>
   </div>
 </footer>
